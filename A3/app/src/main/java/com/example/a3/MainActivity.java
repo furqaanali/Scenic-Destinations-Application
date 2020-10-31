@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -117,13 +118,26 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
                     MATCH_PARENT));
         } else {
 
-            // Make the TitleLayout take 1/3 of the layout's width
-            mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
-                    MATCH_PARENT, 1f));
 
-            // Make the QuoteLayout take 2/3's of the layout's width
-            mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
-                    MATCH_PARENT, 2f));
+            int orientation = getResources().getConfiguration().orientation;
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                // Make the TitleLayout take 1/3 of the layout's width
+                mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                        MATCH_PARENT, 1f));
+
+                // Make the QuoteLayout take 2/3's of the layout's width
+                mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                        MATCH_PARENT, 2f));
+            }
+            else {
+                // Make the TitleLayout take 1/3 of the layout's width
+                mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                        MATCH_PARENT, 0f));
+
+                // Make the QuoteLayout take 2/3's of the layout's width
+                mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                        MATCH_PARENT, 2f));
+            }
         }
     }
 

@@ -16,6 +16,10 @@ public class MyReceiver extends BroadcastReceiver {
         Toast.makeText(arg0, "A1: " + secret,
                 Toast.LENGTH_LONG).show() ;
 
+        Intent intent = new Intent(arg0, MainActivity2.class);
+        intent.putExtra("webpage", secret);
+        arg0.startActivity(intent);
+
     }
 
 }
