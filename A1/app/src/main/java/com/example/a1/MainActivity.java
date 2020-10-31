@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(receiver, mFilter);
 
         Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.a2");
+//        Intent intent = new Intent();
 //        intent.setComponent(new ComponentName("com.example.a2", "MainActivity.java"));
         startActivity(intent);
     }

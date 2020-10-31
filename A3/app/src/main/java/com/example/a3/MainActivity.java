@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.a3.TitlesFragment.ListSelectionListener;
 
@@ -25,7 +26,10 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
 
     public static String[] mTitleArray;
-    public static String[] mQuoteArray;
+    public static int[] mQuoteArray;
+    public static String[] mWebpageArray;
+
+    int currentlySelected = -1;
 
 
     private final QuotesFragment mQuoteFragment = new QuotesFragment();
@@ -48,8 +52,13 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
 
         // Get the string arrays with the titles and qutoes
-        mTitleArray = new String[]{"a", "b", "c"};
-        mQuoteArray = new String[]{"apple", "bottom", "cleats"};
+        mTitleArray = new String[]{"Maldives", "Bora Bora", "Hawaii"};
+        mQuoteArray = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3};
+        mWebpageArray = new String[]{
+                "https://visitmaldives.com/en",
+                "https://www.borabora.com",
+                "https://www.hawaii.com"
+        };
 
         setContentView(R.layout.main);
 
@@ -121,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
     @Override
     public void onListSelection(int index) {
 
+        currentlySelected = index;
+
         // If the QuoteFragment has not been added, add it now
         if (!mQuoteFragment.isAdded()) {
 
@@ -164,9 +175,15 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.item1:
-                Intent aIntent = new Intent(A3_INTENT);
-                aIntent.putExtra("Secret Message", "Furkie");
-                sendOrderedBroadcast(aIntent, KABOOM_PERMISSION);
+                if (currentlySelected >= 0) {
+                    Intent aIntent = new Intent(A3_INTENT);
+                    String webpage = mWebpageArray[currentlySelected];
+                    aIntent.putExtra("Secret Message", webpage);
+                    sendOrderedBroadcast(aIntent, KABOOM_PERMISSION);
+                }
+                else {
+                    Toast.makeText(this, "No item was selected", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.item2:
                 finish();

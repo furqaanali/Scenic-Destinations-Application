@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -18,7 +19,7 @@ public class QuotesFragment extends Fragment {
 
 	private static final String TAG = "QuotesFragment";
 
-	private TextView mQuoteView = null;
+	private ImageView mQuoteView = null;
 	private int mCurrIdx = -1;
 	private int mQuoteArrLen;
 
@@ -31,7 +32,7 @@ public class QuotesFragment extends Fragment {
 		if (newIndex < 0 || newIndex >= mQuoteArrLen)
 			return;
 		mCurrIdx = newIndex;
-		mQuoteView.setText(MainActivity.mQuoteArray[mCurrIdx]);
+		mQuoteView.setImageResource(MainActivity.mQuoteArray[mCurrIdx]);
 	}
 	
 	@Override
@@ -64,7 +65,7 @@ public class QuotesFragment extends Fragment {
 		Log.i(TAG, getClass().getSimpleName() + ":entered onActivityCreated()");
 		super.onActivityCreated(savedInstanceState);
 
-		mQuoteView = (TextView) getActivity().findViewById(R.id.quoteView);
+		mQuoteView = (ImageView) getActivity().findViewById(R.id.quoteView);
 		mQuoteArrLen = MainActivity.mQuoteArray.length;
 	}
 
