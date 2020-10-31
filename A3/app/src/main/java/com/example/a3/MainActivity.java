@@ -44,7 +44,14 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+
+
+        // Get the string arrays with the titles and qutoes
+        mTitleArray = new String[]{"a", "b", "c"};
+        mQuoteArray = new String[]{"apple", "bottom", "cleats"};
+
+        setContentView(R.layout.main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_1);
         setSupportActionBar(toolbar);
@@ -54,15 +61,6 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
-
-
-
-
-        // Get the string arrays with the titles and qutoes
-        mTitleArray = new String[]{"a", "b", "c"};
-        mQuoteArray = new String[]{"apple", "bottom", "cleats"};
-
-        setContentView(R.layout.main);
 
         // Get references to the TitleFragment and to the QuotesFragment
         mTitleFrameLayout = (FrameLayout) findViewById(R.id.title_fragment_container);
