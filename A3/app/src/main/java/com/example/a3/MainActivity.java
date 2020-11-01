@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
 
     private final VacationsFragment mVacationFragment = new VacationsFragment();
+    private TitlesFragment titlesFragment = new TitlesFragment();
 
     // UB 2/24/2019 -- Android Pie twist: Original FragmentManager class is now deprecated.
     //MH 7/7/2020 added support library in gradle module build file
@@ -84,13 +85,13 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         //android.support.v4.app.FragmentTransaction fragmentTransaction = mFragmentManager
         //		.beginTransaction();
 
-        FragmentTransaction fragmentTransaction =mFragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         // Add the TitleFragment to the layout
         // UB: 10/2/2016 Changed add() to replace() to avoid overlapping fragments
         fragmentTransaction.replace(
                 R.id.title_fragment_container,
-                new TitlesFragment());
+                titlesFragment);
 
         // Commit the FragmentTransaction
         fragmentTransaction.commit();
@@ -171,10 +172,9 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
             mFragmentManager.executePendingTransactions();
         }
 
-            // Tell the VacationFragment to show the Vacation string at position index
-        if (mVacationFragment.getShownIndex() != index) {
-            mVacationFragment.showVacationAtIndex(index);
-        }
+        // Tell the VacationFragment to show the Vacation string at position index
+        mVacationFragment.showVacationAtIndex(index);
+
 
     }
 
@@ -223,6 +223,8 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         if (currentlySelected > -1) {
             setLayout();
             onListSelection(currentlySelected);
+            titlesFragment.getListView().setItemChecked(currentlySelected, true);
+
         }
     }
 }

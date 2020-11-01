@@ -86,4 +86,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         unregisterReceiver(receiver);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
