@@ -45,6 +45,7 @@ public class QuotesFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		Log.i(TAG, getClass().getSimpleName() + ":entered onCreate()");
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
 	}
 
 	// Called to create the content view for this Fragment

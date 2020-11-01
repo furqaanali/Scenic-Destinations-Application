@@ -59,6 +59,7 @@ public class TitlesFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, getClass().getSimpleName() + ":entered onCreate()");
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     // UB:  Notice that the superclass's method does an OK job of inflating the

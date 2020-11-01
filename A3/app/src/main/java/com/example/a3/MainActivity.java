@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
+
+//        if (savedInstanceState != null) {
+//            currentlySelected = savedInstanceState.getInt("index");
+//            Toast.makeText(this, "index: " + currentlySelected, Toast.LENGTH_LONG).show();
+//        }
 
 
         // Get the string arrays with the titles and qutoes
@@ -103,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
                         setLayout();
                     }
                 });
+
+
+
     }
 
 
@@ -207,4 +216,18 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("index", currentlySelected);
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        currentlySelected = savedInstanceState.getInt("index");
+        Toast.makeText(this, "indexRESTORE: " + currentlySelected, Toast.LENGTH_LONG).show();
+
+        setLayout();
+        onListSelection(currentlySelected);
+    }
 }

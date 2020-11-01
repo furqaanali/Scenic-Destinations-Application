@@ -11,9 +11,9 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         // TODO Auto-generated method stub
-        Log.i("BroadcastReceiver3 app", "Programmic Receiver 1 called into action.") ;
+//        Log.i("BroadcastReceiver3 app", "Programmic Receiver 1 called into action.") ;
         String secret = arg1.getStringExtra("Secret Message");
-        Toast.makeText(arg0, "A2: " + secret,
+        Toast.makeText(arg0, "A2 received broadcast",
                 Toast.LENGTH_LONG).show() ;
 
     }
