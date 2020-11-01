@@ -15,24 +15,24 @@ import android.widget.TextView;
 //so you can follow the class' lifecycle
 // MH 7/7/2020 -- Changed deprecated Fragment class to support.v4 version.
 // Added as dependency in gradle module build file
-public class QuotesFragment extends Fragment {
+public class VacationsFragment extends Fragment {
 
-	private static final String TAG = "QuotesFragment";
+	private static final String TAG = "VacationsFragment";
 
-	private ImageView mQuoteView = null;
+	private ImageView mVacationView = null;
 	private int mCurrIdx = -1;
-	private int mQuoteArrLen;
+	private int mVacationArrLen;
 
 	int getShownIndex() {
 		return mCurrIdx;
 	}
 
-	// Show the Quote string at position newIndex
-	void showQuoteAtIndex(int newIndex) {
-		if (newIndex < 0 || newIndex >= mQuoteArrLen)
+	// Show the Vacation string at position newIndex
+	void showVacationAtIndex(int newIndex) {
+		if (newIndex < 0 || newIndex >= mVacationArrLen)
 			return;
 		mCurrIdx = newIndex;
-		mQuoteView.setImageResource(MainActivity.mQuoteArray[mCurrIdx]);
+		mVacationView.setImageResource(MainActivity.mVacationArray[mCurrIdx]);
 	}
 	
 	@Override
@@ -54,20 +54,20 @@ public class QuotesFragment extends Fragment {
 			Bundle savedInstanceState) {
 		Log.i(TAG, getClass().getSimpleName() + ":entered onCreateView()");
 
-		// Inflate the layout defined in quote_fragment.xml
+		// Inflate the layout defined in Vacation_fragment.xml
 		// The last parameter is false because the returned view does not need to be attached to the container ViewGroup
-		return inflater.inflate(R.layout.quote_fragment,
+		return inflater.inflate(R.layout.vacation_fragment,
 				container, false);
 	}
 	
-	// Set up some information about the mQuoteView TextView 
+	// Set up some information about the mVacationView TextView
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		Log.i(TAG, getClass().getSimpleName() + ":entered onActivityCreated()");
 		super.onActivityCreated(savedInstanceState);
 
-		mQuoteView = (ImageView) getActivity().findViewById(R.id.quoteView);
-		mQuoteArrLen = MainActivity.mQuoteArray.length;
+		mVacationView = (ImageView) getActivity().findViewById(R.id.vacationView);
+		mVacationArrLen = MainActivity.mVacationArray.length;
 	}
 
 	@Override

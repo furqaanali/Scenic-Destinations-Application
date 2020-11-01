@@ -19,7 +19,7 @@ public class TitlesFragment extends ListFragment {
     private static final String TAG = "TitlesFragment";
     private ListSelectionListener mListener = null;
 
-    // Callback interface that allows this Fragment to notify the QuoteViewerActivity when
+    // Callback interface that allows this Fragment to notify the MainActivity when
     // user clicks on a List Item
     public interface ListSelectionListener {
         public void onListSelection(int index);
@@ -32,7 +32,7 @@ public class TitlesFragment extends ListFragment {
         // Indicates the selected item has been checked
         getListView().setItemChecked(pos, true);
 
-        // Inform the QuoteViewerActivity that the item in position pos has been selected
+        // Inform the MainActivity that the item in position pos has been selected
         mListener.onListSelection(pos);
     }
 
@@ -43,7 +43,7 @@ public class TitlesFragment extends ListFragment {
 
         try {
 
-            // Set the ListSelectionListener for communicating with the QuoteViewerActivity
+            // Set the ListSelectionListener for communicating with the MainActivity
             // Try casting the containing activity to a ListSelectionListener
             mListener = (ListSelectionListener) activity;
 

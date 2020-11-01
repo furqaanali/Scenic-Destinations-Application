@@ -28,22 +28,22 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
 
     public static String[] mTitleArray;
-    public static int[] mQuoteArray;
+    public static int[] mVacationArray;
     public static String[] mWebpageArray;
 
     int currentlySelected = -1;
 
 
-    private final QuotesFragment mQuoteFragment = new QuotesFragment();
+    private final VacationsFragment mVacationFragment = new VacationsFragment();
 
     // UB 2/24/2019 -- Android Pie twist: Original FragmentManager class is now deprecated.
     //MH 7/7/2020 added support library in gradle module build file
 
     FragmentManager mFragmentManager;
 
-    private FrameLayout mTitleFrameLayout, mQuotesFrameLayout;
+    private FrameLayout mTitleFrameLayout, mVacationsFrameLayout;
     private static final int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
-    private static final String TAG = "QuoteViewerActivity";
+    private static final String TAG = "VacationViewerActivity";
 
 
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
         // Get the string arrays with the titles and qutoes
         mTitleArray = new String[]{"Maldives", "Bora Bora", "Hawaii", "Fiji"};
-        mQuoteArray = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+        mVacationArray = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
         mWebpageArray = new String[]{
                 "https://visitmaldives.com/en",
                 "https://www.borabora.com",
@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
 
-        // Get references to the TitleFragment and to the QuotesFragment
+        // Get references to the TitleFragment and to the VacationsFragment
         mTitleFrameLayout = (FrameLayout) findViewById(R.id.title_fragment_container);
-        mQuotesFrameLayout = (FrameLayout) findViewById(R.id.quote_fragment_container);
+        mVacationsFrameLayout = (FrameLayout) findViewById(R.id.vacation_fragment_container);
 
 
         // Get a reference to the SupportFragmentManager instead of original FragmentManager
@@ -111,13 +111,13 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
     private void setLayout() {
 
-        // Determine whether the QuoteFragment has been added
-        if (!mQuoteFragment.isAdded()) {
+        // Determine whether the VacationFragment has been added
+        if (!mVacationFragment.isAdded()) {
 
             // Make the TitleFragment occupy the entire layout
             mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
                     MATCH_PARENT, MATCH_PARENT));
-            mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+            mVacationsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT));
         } else {
 
@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
                 mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                         MATCH_PARENT, 1f));
 
-                // Make the QuoteLayout take 2/3's of the layout's width
-                mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                // Make the VacationLayout take 2/3's of the layout's width
+                mVacationsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                         MATCH_PARENT, 2f));
             }
             else {
@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
                 mTitleFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                         MATCH_PARENT, 0f));
 
-                // Make the QuoteLayout take 2/3's of the layout's width
-                mQuotesFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                // Make the VacationLayout take 2/3's of the layout's width
+                mVacationsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                         MATCH_PARENT, 2f));
             }
         }
@@ -149,17 +149,17 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
 
         currentlySelected = index;
 
-        // If the QuoteFragment has not been added, add it now
-        if (!mQuoteFragment.isAdded()) {
+        // If the VacationFragment has not been added, add it now
+        if (!mVacationFragment.isAdded()) {
 
             // Start a new FragmentTransaction
             // UB 2/24/2019 -- Now must use compatible version of FragmentTransaction
             FragmentTransaction fragmentTransaction = mFragmentManager
                     .beginTransaction();
 
-            // Add the QuoteFragment to the layout
-            fragmentTransaction.add(R.id.quote_fragment_container,
-                    mQuoteFragment);
+            // Add the VacationFragment to the layout
+            fragmentTransaction.add(R.id.vacation_fragment_container,
+                    mVacationFragment);
 
             // Add this FragmentTransaction to the backstack
             fragmentTransaction.addToBackStack(null);
@@ -171,8 +171,10 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
             mFragmentManager.executePendingTransactions();
         }
 
-            // Tell the QuoteFragment to show the quote string at position index
-            mQuoteFragment.showQuoteAtIndex(index);
+            // Tell the VacationFragment to show the Vacation string at position index
+        if (mVacationFragment.getShownIndex() != index) {
+            mVacationFragment.showVacationAtIndex(index);
+        }
 
     }
 
@@ -218,7 +220,9 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         super.onRestoreInstanceState(savedInstanceState);
         currentlySelected = savedInstanceState.getInt("index");
 
-        setLayout();
-        onListSelection(currentlySelected);
+        if (currentlySelected > -1) {
+            setLayout();
+            onListSelection(currentlySelected);
+        }
     }
 }
