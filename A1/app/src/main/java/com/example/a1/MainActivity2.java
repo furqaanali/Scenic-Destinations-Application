@@ -17,10 +17,9 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = getIntent();
         String webpage = intent.getStringExtra("webpage");
 
-//        WebView myWebView = (WebView) findViewById(R.id.webview);
-//        myWebView.loadUrl(webpage);
-
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webpage));
         startActivity(browserIntent);
+
+        finish();
     }
 }

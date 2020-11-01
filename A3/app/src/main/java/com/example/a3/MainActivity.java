@@ -22,7 +22,7 @@ import com.example.a3.TitlesFragment.ListSelectionListener;
 public class MainActivity extends AppCompatActivity implements ListSelectionListener {
 
     private static final String KABOOM_PERMISSION =
-            "com.example.a3.edu.uic.cs478.f20.kaboom" ;
+            "edu.uic.cs478.f20.kaboom" ;
     private static final String A3_INTENT =
             "edu.uic.cs478.Receiver";
 
@@ -50,21 +50,15 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-
-//        if (savedInstanceState != null) {
-//            currentlySelected = savedInstanceState.getInt("index");
-//            Toast.makeText(this, "index: " + currentlySelected, Toast.LENGTH_LONG).show();
-//        }
-
 
         // Get the string arrays with the titles and qutoes
-        mTitleArray = new String[]{"Maldives", "Bora Bora", "Hawaii"};
-        mQuoteArray = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3};
+        mTitleArray = new String[]{"Maldives", "Bora Bora", "Hawaii", "Fiji"};
+        mQuoteArray = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
         mWebpageArray = new String[]{
                 "https://visitmaldives.com/en",
                 "https://www.borabora.com",
-                "https://www.hawaii.com"
+                "https://www.hawaii.com",
+                "https://www.fiji.travel"
         };
 
         setContentView(R.layout.main);
@@ -177,12 +171,9 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
             mFragmentManager.executePendingTransactions();
         }
 
-        if (mQuoteFragment.getShownIndex() != index) {
-
             // Tell the QuoteFragment to show the quote string at position index
             mQuoteFragment.showQuoteAtIndex(index);
 
-        }
     }
 
 
@@ -222,10 +213,10 @@ public class MainActivity extends AppCompatActivity implements ListSelectionList
         super.onSaveInstanceState(outState);
     }
 
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         currentlySelected = savedInstanceState.getInt("index");
-        Toast.makeText(this, "indexRESTORE: " + currentlySelected, Toast.LENGTH_LONG).show();
 
         setLayout();
         onListSelection(currentlySelected);

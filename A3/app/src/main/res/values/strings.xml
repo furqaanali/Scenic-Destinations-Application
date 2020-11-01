@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">A3</string>
-    <string name="permission_description">This is the description</string>
+    <string name="permission_description">Kaboom allows apps A2 and A3 to be launched</string>
 </resources>

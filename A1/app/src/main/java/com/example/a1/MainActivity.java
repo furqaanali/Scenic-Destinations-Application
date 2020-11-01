@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     private static final String KABOOM_PERMISSION =
-            "com.example.a3.edu.uic.cs478.f20.kaboom" ;
+            "edu.uic.cs478.f20.kaboom" ;
     private static final String A3_INTENT =
             "edu.uic.cs478.Receiver";
 
@@ -44,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkPermissionAndBroadcast() {
         if (ContextCompat.checkSelfPermission(this, KABOOM_PERMISSION)
                 == PackageManager.PERMISSION_GRANTED) {
-            Intent aIntent = new Intent("HELLO");
-//            sendOrderedBroadcast(aIntent, KABOOM_PERMISSION) ;
-            Toast.makeText(this, "Permission 1", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "A1: Permission Granted", Toast.LENGTH_SHORT)
                     .show();
 
             registerReceiverAndStartActivity2();
@@ -61,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int code, String[] permissions, int[] results) {
         if (results.length > 0) {
             if (results[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent aIntent = new Intent("HELLO 2") ;
-//                sendOrderedBroadcast(aIntent, KABOOM_PERMISSION);
-                Toast.makeText(this, "Permission 2", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "A1: Permission Granted", Toast.LENGTH_SHORT)
                         .show();
 
                 registerReceiverAndStartActivity2();
@@ -82,8 +78,12 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(receiver, mFilter);
 
         Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.a2");
-//        Intent intent = new Intent();
-//        intent.setComponent(new ComponentName("com.example.a2", "MainActivity.java"));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

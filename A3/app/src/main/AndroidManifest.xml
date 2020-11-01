@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a3">
 
-    <permission android:name="com.example.a3.edu.uic.cs478.f20.kaboom"
-        android:label="My Label"
+    <permission android:name="edu.uic.cs478.f20.kaboom"
+        android:label="KABOOM"
         android:description="@string/permission_description"
         android:protectionLevel="dangerous" />
 
-    <uses-permission android:name="com.example.a3.edu.uic.cs478.f20.kaboom" />
+    <uses-permission android:name="edu.uic.cs478.f20.kaboom" />
 
     <application
         android:allowBackup="true"
