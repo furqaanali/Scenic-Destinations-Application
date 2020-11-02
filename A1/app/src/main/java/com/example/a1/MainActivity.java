@@ -1,5 +1,7 @@
 package com.example.a1;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     BroadcastReceiver receiver;
     IntentFilter mFilter ;
+
+    Boolean isRegistered = false;
 
 
     @Override
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mFilter.setPriority(1) ;
         receiver = new MyReceiver();
         registerReceiver(receiver, mFilter);
+        isRegistered = true;
 
         Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.a2");
         startActivity(intent);
@@ -90,5 +96,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isRegistered", isRegistered);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        isRegistered = savedInstanceState.getBoolean("isRegistered");
+        if (isRegistered) {
+            mFilter = new IntentFilter(A3_INTENT) ;
+            mFilter.setPriority(1) ;
+            receiver = new MyReceiver();
+            registerReceiver(receiver, mFilter);
+        }
     }
 }
